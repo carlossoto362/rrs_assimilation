@@ -1,0 +1,60 @@
+####################################
+contact: carlos.soto362@gmail.com
+####################################
+
+
+####################################
+Description:
+####################################
+
+####################################
+####################################
+Description of folders
+####################################
+####################################
+
+-reference:
+	The FABM tool couples the model that handles the physical forsings, in my case GOTM, and the one that handles the biogeochemistry, for me BFM.
+	 For this end, he starts reading two files gotm.yaml, which specifies which model to use for the physics dinamics, the paths where to find the
+	 forcings, the initial conditions and the parameterizations to use. Then, if specified in the gotm.yaml file, FABM will also read the file
+	 fabm.yaml, which specifies which model to use for the bio-optical model, the biogeochemical model, the path where the forsings are stored,
+	 the initial conditions, parameterizations and the format for the output file.
+
+	The folder reference contain the baseline files needed to simulate the biogeochemistry properties at the Bouée pour l’acquisition d’une Série
+	 Optique à Long terme (BUOSSOLE) site, located in the Ligurian Sea, subbasin of the Western Mediterranean Sea, approximately at the
+	 coordinates 7 degrees 54 minuts E, 43 degrees 22 minuts N. The forcings were download from Alvarez, 2023 (DOI: 10.5281/zenodo.10067424), with
+	 some modifications. The original fabm file from Alvarez is fabm_original.yaml, the one I used was fabm.yaml and gotm.yaml. There is also the
+	 folder "bcs", which contains the Spectral absorption and total scattering coefficients for water, chlorophyll, cdom and particulate organic
+	 carbon needed to run the bio-optical component of the model implemented by Alvarez et al, 2023 (Chromophoric dissolved organic matter dynamics
+	 revealed through the optimization of an optical--biogeochemical model in the northwestern Mediterranean Sea). Runing:
+
+	    $eat-gotm
+
+	inside this folder should work as long as it contains the files fabm.yaml, gotm.yaml, restart.nc, the forlder bcs, and the folder ../forcings.
+
+	The output is a netcdf with all the variables called result.nc, and a file restart.nc, with the value of the state variables at the end of the
+	 simulation.
+
+####################################
+####################################
+-forcings:
+	These folder has the forcings needed to run the BFM coupled with GOTM and the bio-optical components. It has the same forcings as the ones
+	 used by Alvarez, 2023, plus the eastward gradient of preassure (ugos.csv) and the northward gradient of preassure (vgos.csv).
+
+####################################
+####################################
+
+-observations:
+	The ensemble and assimilation tool (EAT) runs the model, and simultaniusly check text files with observations. Every time an observation is
+	 encounter, EAT stops the simulation, executes an assimilation step with the new observation changing the state of the system, and initialize
+	 the simulation with the new states. The observations needed for the assimilation are in this folder. 
+	For my work, I used three types of observations:
+
+	   *log transform of the buoy sea surface chlorophyll: chla_std.txt.
+	   *log transform of the remote sensing reflectance: rrs_425.txt, rrs_450.txt, rrs_500.txt, rrs_525.txt, rrs_550.txt.
+	   *log transform of the remote sensing sea surface chlorophyll, nap and cdom: chla_inverted.txt, nap_inverted.txt, cdom_inverted.txt.
+
+####################################
+####################################
+
+

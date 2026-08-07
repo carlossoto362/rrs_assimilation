@@ -1,0 +1,355 @@
+version: 6
+title: iGOTM simulation
+location:
+  name: BOUSSOLE buoy
+  latitude: 43.366667
+  longitude: 7.9
+  depth: 2446.5
+time:
+  start: 2001-01-01 00:00:00
+  stop: 2010-12-31 23:00:00
+  dt: 600.0
+grid:
+  nlev: 196
+  method: file_sigma
+  ddu: 1.0
+  ddl: 1.0
+  file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/grid.dat
+temperature:
+  method: file
+  constant_value: 0.0
+  file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/votemper.txt
+  column: 1
+  two_layer:
+    z_s: 0.0
+    t_s: 0.0
+    z_b: 0.0
+    t_b: 0.0
+  NN: 0.0
+  relax:
+    tau: 1000000.0
+salinity:
+  method: file
+  constant_value: 0.0
+  file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/vosaline.txt
+  column: 1
+  two_layer:
+    z_s: 0.0
+    s_s: 0.0
+    z_b: 0.0
+    s_b: 0.0
+  NN: 0.0
+  relax:
+    tau: 1000000.0
+surface:
+  fluxes:
+    method: fairall
+    heat:
+      method: constant
+      constant_value: 0.0
+      file:
+      column: 1
+    tx:
+      method: constant
+      constant_value: 0.0
+      file:
+      column: 1
+    ty:
+      method: constant
+      constant_value: 0.0
+      file:
+      column: 1
+  u10:
+    method: file
+    constant_value: 0.0
+    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    column: 1
+    scale_factor: 0.8004225615467486
+  v10:
+    method: file
+    constant_value: 0.0
+    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    column: 2
+    scale_factor: 1.0788852433484553
+  airp:
+    method: file
+    constant_value: 0.0
+    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    column: 3
+    scale_factor: 100.0
+  airt:
+    method: file
+    constant_value: 0.0
+    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    column: 4
+  hum:
+    method: file
+    constant_value: 0.0
+    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    column: 5
+    type: dew_point
+  cloud:
+    method: file
+    constant_value: 0.0
+    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    column: 6
+  precip:
+    method: file
+    constant_value: 0.0
+    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/precip.dat
+    column: 1
+    flux_impact: true
+  calc_evaporation: true
+  swr:
+    method: calculate
+    constant_value: 0.0
+    file:
+    column: 1
+  longwave_radiation:
+    method: clark
+    file:
+    column: 1
+  albedo:
+    method: payne
+    constant_value: 0.0
+  roughness:
+    charnock: false
+    charnock_val: 1400.0
+    z0s_min: 0.02
+bottom:
+  h0b: 0.005
+light_extinction:
+  method: jerlov-i
+  A:
+    method: constant
+    constant_value: 0.7
+    file:
+    column: 1
+  g1:
+    method: constant
+    constant_value: 0.4
+    file:
+    column: 1
+  g2:
+    method: constant
+    constant_value: 8.0
+    file:
+    column: 1
+turbulence:
+  turb_method: second_order
+  tke_method: tke
+  len_scale_method: dissipation
+  stab_method: schumann_gerz
+  turb_param:
+    cm0_fix: 0.5477
+    Prandtl0_fix: 0.74
+    cw: 100.0
+    compute_kappa: false
+    kappa: 0.4
+    compute_c3: true
+    Ri_st: 0.25
+    length_lim: true
+    galp: 0.27
+    const_num: 0.0005
+    const_nuh: 0.0005
+    k_min: 1.2202741562152006e-06
+    eps_min: 1.0e-12
+    kb_min: 1.0e-10
+    epsb_min: 1.0e-14
+mimic_3d:
+  ext_pressure:
+    type: elevation
+    dpdx:
+      method: file
+      constant_value: 0.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/ugos.csv
+      column: 2
+      tidal:
+        amp_1: 0.0
+        phase_1: 0.0
+        amp_2: 0.0
+        phase_2: 0.0
+    dpdy:
+      method: file
+      constant_value: 0.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/vgos.csv
+      column: 2
+      tidal:
+        amp_1: 0.0
+        phase_1: 0.0
+        amp_2: 0.0
+        phase_2: 0.0
+    h:
+      method: file
+      constant_value: 0.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/ext_press.dat
+      column: 1
+    period_1: 44714.0
+    period_2: 43200.0
+  int_press:
+    dtdx:
+      method: off
+      constant_value: 0.0
+      file:
+      column: 1
+    dtdy:
+      method: off
+      constant_value: 0.0
+      file:
+      column: 1
+    dsdx:
+      method: off
+      constant_value: 0.0
+      file:
+      column: 1
+    dsdy:
+      method: off
+      constant_value: 0.0
+      file:
+      column: 1
+    t_adv: false
+    s_adv: false
+  zeta:
+    method: constant
+    constant_value: 0.0
+    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/zeta.dat
+    column: 1
+    tidal:
+      period_1: 44714.0
+      amp_1: 0.0
+      phase_1: 0.0
+      period_2: 43200.0
+      amp_2: 0.0
+      phase_2: 0.0
+  w:
+    max:
+      method: off
+      constant_value: 0.0
+      file:
+      column: 1
+    height:
+      method: constant
+      constant_value: 0.0
+      file:
+      column: 1
+    adv_discr: p2_pdm
+fabm:
+  use: true
+  freshwater_impact: true
+  feedbacks:
+    shade: false
+    albedo: false
+    surface_drag: false
+  repair_state: true
+  input:
+    mole_fraction_of_carbon_dioxide_in_air:
+      method: file
+      constant_value: 395.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/pco2a.txt
+      column: 1
+    N1/p:
+      method: file
+      constant_value: 0.4
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/N1p.txt
+      relax_tau: 31500000.0
+      column: 1
+    N3/n:
+      method: file
+      constant_value: 4.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/N3n.txt
+      relax_tau: 31500000.0
+      column: 1
+    N5/s:
+      method: file
+      constant_value: 4.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/N5s.txt
+      relax_tau: 31500000.0
+      column: 1
+    O2/o:
+      method: file
+      constant_value: 220.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/O2o.txt
+      relax_tau: 31500000.0
+      column: 1
+    O3h/h:
+      method: file
+      constant_value: 2500.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/O3h.txt
+      relax_tau: 31500000.0
+      column: 1
+    O3/c:
+      method: file
+      constant_value: 25000.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/O3c.txt
+      relax_tau: 31500000.0
+      column: 1
+    visibility_in_air:
+      method: constant
+      constant_value: 25000.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/oasim.txt
+      column: 1
+    aerosol_air_mass_type:
+      method: constant
+      constant_value: 10.0
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/oasim.txt
+      column: 1
+    atmosphere_mass_content_of_cloud_liquid_water:
+      method: constant
+      constant_value: 0.1
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/tclw.txt
+      column: 1
+    atmosphere_mass_content_of_water_vapor:
+      method: constant
+      constant_value: 0.1
+      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/tcwv.txt
+      column: 1
+eq_state:
+  method: jackett
+  form: full-pot
+  linear:
+    T0: 10.0
+    S0: 35.0
+    p0: 0.0
+    dtr0: -0.17
+    dsr0: 0.78
+restart:
+  load: true
+output:
+  result:
+    format: netcdf
+    time_unit: day
+    time_step: 1
+    time_start: 2001-01-01 00:00:00
+    time_stop: 2010-12-31 23:00:00
+    time_method: mean
+    variables:
+    - source: /*
+      time_method: 2
+  daily_inst:
+    time_unit: day
+    time_step: 1
+    time_start: 2001-01-01 12:00:00
+    time_stop: 2010-12-31 23:00:00
+    variables:
+    - source: h
+    - source: lightspectral_Rrs400
+    - source: lightspectral_Rrs425
+    - source: lightspectral_Rrs450
+    - source: lightspectral_Rrs475
+    - source: lightspectral_Rrs500
+    - source: lightspectral_Rrs525
+    - source: lightspectral_Rrs550
+    - source: lightspectral_Rrs575
+    - source: lightspectral_Rrs675
+    - source: lightspectral_Ed400
+    - source: lightspectral_Ed425
+    - source: lightspectral_Ed450
+    - source: lightspectral_Ed500
+    - source: lightspectral_Ed525
+    - source: lightspectral_Ed550
+    - source: lightspectral_Ed575
+    - source: lightspectral_Ed675
+    - source: lightspectral_PAR_tot
+    - source: lightspectral_E0475
+    - source: lightspectral_E0500
+      time_method: 1

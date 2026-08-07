@@ -1,0 +1,977 @@
+check_conservation: false
+require_initialization: true
+log: true
+instances:
+  Benthic_layer:
+    model: ogs/BenthicLayer
+    parameters:
+      p_BenDepth: 12000.0
+  zenith_angle:
+    model: ogs/zenith_angle
+  light:
+    model: ogs/light
+    parameters:
+      pEPSCHL: 0.0088
+      pEPSCDOM: 0.01476
+      EPS0r: 0.04
+      pEIR_eow: 0.22247306601056446
+    coupling:
+      X1c: X1/c
+      X2c: X2/c
+      X3c: X3/c
+  light_atm:
+    model: spectral/atmosphere
+    parameters:
+      lambda_method: 1
+      compute_mean_wind: true
+      spectral_output: 1
+  relhum:
+    model: spectral/relhum
+  ozone:
+    model: spectral/ozone
+  lightspectral:
+    model: ogs/light_spectral_OASIM
+    parameters:
+      nlt: 33
+      npft: 4
+      SdomX1: 0.0175
+      X1coeff: 0.015
+      SdomX2: 0.0162
+      X2coeff: 0.015933655563462684
+      SdomX3: 0.018
+      X3coeff: 0.015
+      Xmincoeff: 0.0
+      lambda_aCDOM: 450
+      compute_acdom: .FALSE.
+      Sapar: 0.013
+      lambda_aPart: 440
+      aparcoeff: 0.00058
+      Sbpar: 0.5
+      lambda_bPart: 550
+      bparcoeff: 0.012
+      bb_to_b: 0.0024
+      compute_anap: .FALSE.
+      p_epsP1: 0.0152
+      p_epsP2: 0.0293
+      p_epsP3: 0.0443
+      p_epsP4: 0.0178
+      compute_aph: .FALSE.
+      p_bpsP1: 0.014
+      p_bpsP2: 0.0077
+      p_bpsP3: 0.0101
+      p_bpsP4: 0.0112
+      compute_bph: .FALSE.
+      p_bbrP1: 0.002
+      p_bbrP2: 0.0071
+      p_bbrP3: 0.0039
+      p_bbrP4: 0.003
+      compute_bbc: .FALSE.
+      p_useSPM: .FALSE.
+      p_spmc1: 0.016
+      p_spmc2: 0.04942693621950423
+      p_spmS: 0.013036213586387735
+      lambda_aSPM: 440
+      p_spmb: 0.7
+      p_spmbb: 0.008
+    coupling:
+      X1c: X1/c
+      X2c: X2/c
+      X3c: X3/c
+      R6c: R6/c
+      R8c: R8/c
+      direct_band1: light_atm/dir_sf_band1
+      diffuse_band1: light_atm/dif_sf_band1
+      direct_band2: light_atm/dir_sf_band2
+      diffuse_band2: light_atm/dif_sf_band2
+      direct_band3: light_atm/dir_sf_band3
+      diffuse_band3: light_atm/dif_sf_band3
+      direct_band4: light_atm/dir_sf_band4
+      diffuse_band4: light_atm/dif_sf_band4
+      direct_band5: light_atm/dir_sf_band5
+      diffuse_band5: light_atm/dif_sf_band5
+      direct_band6: light_atm/dir_sf_band6
+      diffuse_band6: light_atm/dif_sf_band6
+      direct_band7: light_atm/dir_sf_band7
+      diffuse_band7: light_atm/dif_sf_band7
+      direct_band8: light_atm/dir_sf_band8
+      diffuse_band8: light_atm/dif_sf_band8
+      direct_band9: light_atm/dir_sf_band9
+      diffuse_band9: light_atm/dif_sf_band9
+      direct_band10: light_atm/dir_sf_band10
+      diffuse_band10: light_atm/dif_sf_band10
+      direct_band11: light_atm/dir_sf_band11
+      diffuse_band11: light_atm/dif_sf_band11
+      direct_band12: light_atm/dir_sf_band12
+      diffuse_band12: light_atm/dif_sf_band12
+      direct_band13: light_atm/dir_sf_band13
+      diffuse_band13: light_atm/dif_sf_band13
+      direct_band14: light_atm/dir_sf_band14
+      diffuse_band14: light_atm/dif_sf_band14
+      direct_band15: light_atm/dir_sf_band15
+      diffuse_band15: light_atm/dif_sf_band15
+      direct_band16: light_atm/dir_sf_band16
+      diffuse_band16: light_atm/dif_sf_band16
+      direct_band17: light_atm/dir_sf_band17
+      diffuse_band17: light_atm/dif_sf_band17
+      direct_band18: light_atm/dir_sf_band18
+      diffuse_band18: light_atm/dif_sf_band18
+      direct_band19: light_atm/dir_sf_band19
+      diffuse_band19: light_atm/dif_sf_band19
+      direct_band20: light_atm/dir_sf_band20
+      diffuse_band20: light_atm/dif_sf_band20
+      direct_band21: light_atm/dir_sf_band21
+      diffuse_band21: light_atm/dif_sf_band21
+      direct_band22: light_atm/dir_sf_band22
+      diffuse_band22: light_atm/dif_sf_band22
+      direct_band23: light_atm/dir_sf_band23
+      diffuse_band23: light_atm/dif_sf_band23
+      direct_band24: light_atm/dir_sf_band24
+      diffuse_band24: light_atm/dif_sf_band24
+      direct_band25: light_atm/dir_sf_band25
+      diffuse_band25: light_atm/dif_sf_band25
+      direct_band26: light_atm/dir_sf_band26
+      diffuse_band26: light_atm/dif_sf_band26
+      direct_band27: light_atm/dir_sf_band27
+      diffuse_band27: light_atm/dif_sf_band27
+      direct_band28: light_atm/dir_sf_band28
+      diffuse_band28: light_atm/dif_sf_band28
+      direct_band29: light_atm/dir_sf_band29
+      diffuse_band29: light_atm/dif_sf_band29
+      direct_band30: light_atm/dir_sf_band30
+      diffuse_band30: light_atm/dif_sf_band30
+      direct_band31: light_atm/dir_sf_band31
+      diffuse_band31: light_atm/dif_sf_band31
+      direct_band32: light_atm/dir_sf_band32
+      diffuse_band32: light_atm/dif_sf_band32
+      direct_band33: light_atm/dir_sf_band33
+      diffuse_band33: light_atm/dif_sf_band33
+      costheta_r: light_atm/costheta_r
+  N1:
+    long_name: phosphate
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: p
+    initialization:
+      p: 0.4
+  N3:
+    long_name: nitrate
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: n
+    initialization:
+      n: 8.0
+  N4:
+    long_name: ammonium
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: n
+    initialization:
+      n: 0.1
+  N5:
+    long_name: silicate
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: s
+    initialization:
+      s: 4.5
+  N6:
+    long_name: Reduction equivalent
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: r
+    initialization:
+      r: 1.0
+  O3:
+    long_name: dissolved inorganic carbon
+    model: ogs/PelagicCSYS
+    initialization:
+      c: 28500.0
+    coupling:
+      N1p: N1/p
+      N5s: N5/s
+      O3h: O3h/h
+  O2:
+    long_name: Dissolved Oxygen
+    model: ogs/PelOxygen
+    initialization:
+      o: 300.0
+  O3h:
+    long_name: alkalinity
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: h
+    initialization:
+      h: 2660.0
+  O4:
+    long_name: Nitrogen Sink
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: n
+    initialization:
+      n: 200.0
+  R1:
+    long_name: Dissolved Organic carbon Labile
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: cnp
+    initialization:
+      c: 80.0
+      n: 1.008
+      p: 0.062
+  R2:
+    long_name: Dissolved Organic carbon semi-Labile
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: c
+    initialization:
+      c: 400.0
+  R3:
+    long_name: Dissolved Organic carbon semi-refractory
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: c
+    initialization:
+      c: 480.0
+  R6:
+    long_name: Small Particulate Organic carbon
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: cpns
+      rm: 7.0
+    initialization:
+      c: 1.0
+      n: 0.0126
+      p: 0.0007862
+      s: 0.0126
+  R8:
+    long_name: Large Particulate Organic carbon
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: cpns
+      rm: 15.0
+    initialization:
+      c: 1.0
+      n: 0.0126
+      p: 0.0007862
+      s: 0.0126
+  X1:
+    long_name: labile CDOM
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: c
+    initialization:
+      c: 1.0
+  X2:
+    long_name: semi labile CDOM
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: c
+    initialization:
+      c: 3.0
+  X3:
+    long_name: semi refractory CDOM
+    model: ogs/bfm_pelagic_base
+    parameters:
+      composition: c
+    initialization:
+      c: 1.25
+  P1:
+    long_name: diatoms
+    model: ogs/Phyto
+    parameters:
+      p_q10: 2.0
+      p_temp: 0.0
+      p_sum: 3.874205823517136
+      p_srs: 0.076
+      p_fR6: 0.3
+      p_sdmo: 0.0
+      p_thdo: 0.0
+      p_seo: 0.0
+      p_sheo: 0.0
+      p_pu_ea: 0.1
+      p_pu_ra: 0.1
+      p_switchDOC: 2
+      p_netgrowth: .TRUE.
+      p_limnut: 1
+      p_qun: 0.025
+      p_lN4: 1.0
+      p_qnlc: 0.00687
+      p_qncPPY: 0.0126
+      p_xqn: 2.0
+      p_qup: 0.0025
+      p_qplc: 0.00057
+      p_qpcPPY: 0.000786
+      p_xqp: 2.0
+      p_switchSi: 2
+      p_chPs: 0.3
+      p_Contois: 0.0
+      p_qus: 0.0025
+      p_qslc: 0.007
+      use_Si: .TRUE.
+      p_qscPPY: 0.01
+      p_esNI: 0.7
+      p_res: 5.0
+      p_caco3r: 0.0
+      p_fX1p: 0.0
+      p_fX2p: 0.06521290952838932
+      p_switchChl: 2
+      p_sdchl: 0.2
+      p_alpha_chl: 1.38e-05
+      p_quantum_yield: 0.00075
+      p_Esource: 1
+      p_OT: 1
+      p_qlcPPY: 0.026
+      p_epsChla: 0.03
+      p_tochl_relt: 0.0
+      p_EpEk_or: 0.0
+      p_iswLtyp: 5
+      p_chELiPPY: 50.0
+      p_clELiPPY: 100.0
+      p_ruELiPPY: 8.0
+      p_addepth: 0.29889337907103747
+      p_rPIm: 0.0
+    initialization:
+      c: 8.0
+      n: 0.1008
+      p: 0.006288
+      s: 0.08
+      Chl: 0.16
+    coupling:
+      N1p: N1/p
+      N3n: N3/n
+      N4n: N4/n
+      N5s: N5/s
+      O3c: O3/c
+      O2o: O2/o
+      R1c: R1/c
+      R1n: R1/n
+      R1p: R1/p
+      R2c: R2/c
+      R6c: R6/c
+      R6n: R6/n
+      R6s: R6/s
+      R6p: R6/p
+      R8c: R8/c
+      R8n: R8/n
+      R8s: R8/s
+      R8p: R8/p
+      X1c: X1/c
+      X2c: X2/c
+      O3h: O3h/h
+      O5c: O5/c
+      PAR: lightspectral/PAR_P1
+  P2:
+    long_name: nanoflagellates
+    model: ogs/Phyto
+    parameters:
+      p_q10: 2.25
+      p_temp: 0.0
+      p_sum: 2.6
+      p_srs: 0.09
+      p_fR6: 0.9103996667917362
+      p_sdmo: 0.0
+      p_thdo: 0.0
+      p_seo: 0.0
+      p_sheo: 0.0
+      p_pu_ea: 0.15
+      p_pu_ra: 0.1
+      p_switchDOC: 2
+      p_netgrowth: .TRUE.
+      p_limnut: 1
+      p_qun: 0.025
+      p_lN4: 0.5
+      p_qnlc: 0.00687
+      p_qncPPY: 0.0126
+      p_xqn: 2.0
+      p_qup: 0.0035
+      p_qplc: 0.000352
+      p_qpcPPY: 0.000556
+      p_xqp: 2.0
+      p_esNI: 0.75
+      p_res: 0.0
+      use_CaCO3: .TRUE.
+      p_caco3r: 0.3
+      p_fX1p: 0.0
+      p_fX2p: 0.035
+      p_switchChl: 2
+      p_sdchl: 0.2
+      p_alpha_chl: 5.53132774404089e-06
+      p_quantum_yield: 0.000198
+      p_Esource: 1
+      p_OT: 2
+      p_qlcPPY: 0.045
+      p_epsChla: 0.016601066831833065
+      p_tochl_relt: 0.0
+      p_EpEk_or: 0.0
+      p_iswLtyp: 5
+      p_chELiPPY: 50.0
+      p_clELiPPY: 100.0
+      p_ruELiPPY: 10.0
+      p_addepth: 0.26765202440353064
+      p_rPIm: 0.0
+    initialization:
+      c: 8.0
+      n: 0.1008
+      p: 0.006288
+      Chl: 0.16
+    coupling:
+      N1p: N1/p
+      N3n: N3/n
+      N4n: N4/n
+      O3c: O3/c
+      O2o: O2/o
+      R1c: R1/c
+      R1n: R1/n
+      R1p: R1/p
+      R2c: R2/c
+      R6c: R6/c
+      R6n: R6/n
+      R6p: R6/p
+      R8c: R8/c
+      R8n: R8/n
+      R8p: R8/p
+      X1c: X1/c
+      X2c: X2/c
+      O3h: O3h/h
+      O5c: O5/c
+      PAR: lightspectral/PAR_P2
+  P3:
+    long_name: Picoplankton
+    model: ogs/Phyto
+    parameters:
+      p_q10: 2.0
+      p_temp: 0.75
+      p_sum: 3.5
+      p_srs: 0.1
+      p_fR6: 0.6523451131116624
+      p_sdmo: 0.0
+      p_thdo: 0.0
+      p_seo: 0.0
+      p_sheo: 0.0
+      p_pu_ea: 0.15
+      p_pu_ra: 0.2
+      p_switchDOC: 2
+      p_netgrowth: .TRUE.
+      p_limnut: 1
+      p_qun: 0.25
+      p_lN4: 0.1
+      p_qnlc: 0.00687
+      p_qncPPY: 0.0126
+      p_xqn: 2.0
+      p_qup: 0.0025
+      p_qplc: 0.0004288
+      p_qpcPPY: 0.00072
+      p_xqp: 2.0
+      p_esNI: 0.75
+      p_res: 0.0
+      p_caco3r: 0.0
+      p_fX1p: 0.0
+      p_fX2p: 0.039
+      p_switchChl: 2
+      p_sdchl: 0.2
+      p_alpha_chl: 2.1997811338021886e-05
+      p_quantum_yield: 0.00099
+      p_Esource: 1
+      p_OT: 3
+      p_qlcPPY: 0.014
+      p_epsChla: 0.03
+      p_tochl_relt: 0.0
+      p_EpEk_or: 0.0
+      p_iswLtyp: 5
+      p_chELiPPY: 50.0
+      p_clELiPPY: 100.0
+      p_ruELiPPY: 10.0
+      p_addepth: 0.19138372739985574
+      p_rPIm: 0.0
+    initialization:
+      c: 8.0
+      n: 0.1008
+      p: 0.006288
+      Chl: 0.16
+    coupling:
+      N1p: N1/p
+      N3n: N3/n
+      N4n: N4/n
+      O3c: O3/c
+      O2o: O2/o
+      R1c: R1/c
+      R1n: R1/n
+      R1p: R1/p
+      R2c: R2/c
+      R6c: R6/c
+      R6n: R6/n
+      R6p: R6/p
+      R8c: R8/c
+      R8n: R8/n
+      R8p: R8/p
+      X1c: X1/c
+      X2c: X2/c
+      O3h: O3h/h
+      O5c: O5/c
+      PAR: lightspectral/PAR_P3
+  P4:
+    long_name: dinoflagellates
+    model: ogs/Phyto
+    parameters:
+      p_q10: 2.0
+      p_temp: 0.0
+      p_sum: 1.5
+      p_srs: 0.1
+      p_fR6: 0.5
+      p_sdmo: 0.0
+      p_thdo: 0.0
+      p_seo: 0.0
+      p_sheo: 100.0
+      p_pu_ea: 0.23276241332510078
+      p_pu_ra: 0.1
+      p_switchDOC: 2
+      p_netgrowth: .TRUE.
+      p_limnut: 1
+      p_qun: 0.025
+      p_lN4: 1.0
+      p_qnlc: 0.00687
+      p_qncPPY: 0.0126
+      p_xqn: 2.0
+      p_qup: 0.0025
+      p_qplc: 0.0004288
+      p_qpcPPY: 0.000786
+      p_xqp: 2.0
+      p_esNI: 0.75
+      p_res: 2.5
+      p_caco3r: 0.0
+      p_fX1p: 0.0
+      p_fX2p: 0.05476691596757515
+      p_switchChl: 2
+      p_sdchl: 0.2
+      p_alpha_chl: 6.8e-06
+      p_quantum_yield: 0.000257
+      p_Esource: 1
+      p_OT: 4
+      p_qlcPPY: 0.019
+      p_epsChla: 0.03
+      p_tochl_relt: 0.0
+      p_EpEk_or: 0.0
+      p_iswLtyp: 5
+      p_chELiPPY: 50.0
+      p_clELiPPY: 100.0
+      p_ruELiPPY: 10.0
+      p_addepth: 0.25
+      p_rPIm: 0.0
+    initialization:
+      c: 8.0
+      n: 0.1008
+      p: 0.006288
+      Chl: 0.16
+    coupling:
+      N1p: N1/p
+      N3n: N3/n
+      N4n: N4/n
+      O3c: O3/c
+      O2o: O2/o
+      R1c: R1/c
+      R1n: R1/n
+      R1p: R1/p
+      R2c: R2/c
+      R6c: R6/c
+      R6n: R6/n
+      R6p: R6/p
+      R8c: R8/c
+      R8n: R8/n
+      R8p: R8/p
+      X1c: X1/c
+      X2c: X2/c
+      O3h: O3h/h
+      O5c: O5/c
+      PAR: lightspectral/PAR_P4
+  B1:
+    long_name: Bacteria
+    model: ogs/PelBac
+    parameters:
+      p_version: 2
+      p_q10: 2.95
+      p_chdo: 30.0
+      p_sd: 0.0
+      p_sd2: 0.0
+      p_suhR1: 0.5
+      p_sulR1: 0.0
+      p_suR2: 0.05
+      p_suR3: 0.0
+      p_suR6: 0.012
+      p_suR8: 0.03
+      p_sum: 8.38
+      p_pu_ra: 0.76
+      p_pu_ra_o: 0.15609938661484957
+      p_srs: 0.01
+      p_qncPBA: 0.017
+      p_qpcPBA: 0.0019
+      p_qlnc: 0.0085
+      p_qlpc: 0.00095
+      p_qun: 0.05
+      p_qup: 0.005
+      p_chn: 0.05
+      p_chp: 0.8250109556193697
+      p_rec: 1.0
+      p_ruen: 1.0
+      p_ruep: 1.0
+      p_pu_ea_R3: 0.0
+      p_qro: 0.5
+      p_pe_R1c: 0.6
+      p_pe_R1n: 0.72
+      p_pe_R1p: 0.832
+      p_fX1b: 0.0
+      p_fX2b: 0.02
+      p_fX3b: 0.018
+      p_fR6: 1.0
+    initialization:
+      c: 1.0
+      n: 0.017
+      p: 0.0019
+    coupling:
+      N1p: N1/p
+      N3n: N3/n
+      N4n: N4/n
+      N6r: N6/r
+      O3c: O3/c
+      O3h: O3h/h
+      O2o: O2/o
+      R1c: R1/c
+      R1n: R1/n
+      R1p: R1/p
+      R2c: R2/c
+      R3c: R3/c
+      R6c: R6/c
+      R6n: R6/n
+      R6p: R6/p
+      R6s: R6/s
+      R8c: R8/c
+      R8n: R8/n
+      R8p: R8/p
+      R8s: R8/s
+      X1c: X1/c
+      X2c: X2/c
+      X3c: X3/c
+  Z5:
+    long_name: Microzooplankton
+    model: ogs/MicroZoo
+    parameters:
+      p_q10: 2.0
+      p_srs: 0.02
+      p_sum: 2.71
+      p_sdo: 0.05
+      p_sd: 0.0
+      p_pu: 0.5097508040454627
+      p_pu_ea: 0.5
+      p_chro: 8
+      p_chuc: 30.0
+      p_minfood: 101.93055646911968
+      p_pecaco3: 0.5
+      p_qpcMIZ: 0.00185
+      p_qncMIZ: 0.0167
+      nprey: 7
+      suprey1: 0.1
+      suprey2: 0.7
+      suprey3: 1.0
+      suprey4: 0.1
+      suprey5: 0.1
+      suprey6: 1.0
+      suprey7: 1.0
+      isP21: 0
+      isP22: 0
+      isP23: 1
+      isP24: 0
+      isP25: 0
+      isP26: 0
+      isP27: 0
+      p_fR6: 0.5
+      p_pe_R1c: 0.6
+      p_pe_R1n: 0.72
+      p_pe_R1p: 0.832
+      p_fX1z: 0.018
+    initialization:
+      c: 1.0
+      n: 0.0167
+      p: 0.00185
+    coupling:
+      O2o: O2/o
+      O3c: O3/c
+      N4n: N4/n
+      N1p: N1/p
+      R6c: R6/c
+      R6s: R6/s
+      R6n: R6/n
+      R6p: R6/p
+      R8c: R8/c
+      R8s: R8/s
+      R8n: R8/n
+      R8p: R8/p
+      X1c: X1/c
+      R1c: R1/c
+      R1n: R1/n
+      R1p: R1/p
+      prey1: B1
+      prey2: P1
+      prey3: P2
+      prey4: P3
+      prey5: P4
+      prey6: Z5
+      prey7: Z6
+      O3h: O3h/h
+      O5c: O5/c
+  Z6:
+    long_name: Heterotrophic Nanoflagellates (HNAN)
+    model: ogs/MicroZoo
+    parameters:
+      p_q10: 2.0
+      p_srs: 0.016816512396205054
+      p_sum: 3.88
+      p_sdo: 0.05
+      p_sd: 0.0
+      p_pu: 0.3
+      p_pu_ea: 0.5
+      p_chro: 8
+      p_chuc: 121.07922573989183
+      p_minfood: 100.0
+      p_pecaco3: 0.5
+      p_qpcMIZ: 0.00185
+      p_qncMIZ: 0.0167
+      nprey: 7
+      suprey1: 1.0
+      suprey2: 0.0
+      suprey3: 0.2
+      suprey4: 1.0
+      suprey5: 0.0
+      suprey6: 0.0
+      suprey7: 0.2
+      isP21: 0
+      isP22: 0
+      isP23: 1
+      isP24: 0
+      isP25: 0
+      isP26: 0
+      isP27: 0
+      p_fR6: 1.0
+      p_pe_R1c: 0.6
+      p_pe_R1n: 0.72
+      p_pe_R1p: 0.832
+      p_fX1z: 0.03
+    initialization:
+      c: 1.0
+      n: 0.0167
+      p: 0.00185
+    coupling:
+      O2o: O2/o
+      O3c: O3/c
+      N4n: N4/n
+      N1p: N1/p
+      R6c: R6/c
+      R6s: R6/s
+      R6n: R6/n
+      R6p: R6/p
+      R8c: R8/c
+      R8s: R8/s
+      R8n: R8/n
+      R8p: R8/p
+      X1c: X1/c
+      R1c: R1/c
+      R1n: R1/n
+      R1p: R1/p
+      prey1: B1
+      prey2: P1
+      prey3: P2
+      prey4: P3
+      prey5: P4
+      prey6: Z5
+      prey7: Z6
+      O3h: O3h/h
+      O5c: O5/c
+  Z3:
+    long_name: Carnivorous Mesozooplankton
+    model: ogs/MesoZoo
+    parameters:
+      p_q10: 2.0
+      p_srs: 0.01
+      p_sum: 2.0
+      p_sd: 0.017085576550268024
+      p_vum: 0.008
+      p_puI: 0.6
+      p_peI: 0.3
+      p_sdo: 0.01
+      p_sds: 2.0
+      p_pecaco3: 0.75
+      p_qpcMEZ: 0.00167
+      p_qncMEZ: 0.015
+      p_clO2o: 30.0
+      p_fR6: 0.5
+      nprey: 3
+      suprey1: 1.0
+      suprey2: 1.0
+      suprey3: 1.0
+      isP21: 0
+      isP22: 0
+      isP23: 0
+    initialization:
+      c: 1.0
+      n: 0.015
+      p: 0.00167
+    coupling:
+      O2o: O2/o
+      O3c: O3/c
+      N1p: N1/p
+      N4n: N4/n
+      R6c: R6/c
+      R6n: R6/n
+      R6p: R6/p
+      R6s: R6/s
+      R8c: R8/c
+      R8n: R8/n
+      R8p: R8/p
+      R8s: R8/s
+      prey1: P4
+      prey2: Z3
+      prey3: Z4
+      O3h: O3h/h
+      O5c: O5/c
+  Z4:
+    long_name: Omnivorous Mesozooplankton
+    model: ogs/MesoZoo
+    parameters:
+      p_q10: 2.0
+      p_srs: 0.02
+      p_sum: 2.228718666118481
+      p_sd: 0.02
+      p_vum: 0.02
+      p_puI: 0.6
+      p_peI: 0.35
+      p_sdo: 0.01
+      p_sds: 2.0
+      p_pecaco3: 0.75
+      p_qpcMEZ: 0.00167
+      p_qncMEZ: 0.015
+      p_clO2o: 30.0
+      p_fR6: 0.5
+      nprey: 5
+      suprey1: 1.0
+      suprey2: 0.75
+      suprey3: 1.0
+      suprey4: 1.0
+      suprey5: 1.0
+      isP21: 0
+      isP22: 1
+      isP23: 0
+      isP24: 0
+      isP25: 0
+    initialization:
+      c: 1.0
+      n: 0.015
+      p: 0.00167
+    coupling:
+      O2o: O2/o
+      O3c: O3/c
+      N1p: N1/p
+      N4n: N4/n
+      R6c: R6/c
+      R6n: R6/n
+      R6p: R6/p
+      R6s: R6/s
+      R8c: R8/c
+      R8n: R8/n
+      R8p: R8/p
+      R8s: R8/s
+      prey1: P1
+      prey2: P2
+      prey3: P4
+      prey4: Z5
+      prey5: Z4
+      O3h: O3h/h
+      O5c: O5/c
+  PelChem:
+    long_name: pelagic chemistry
+    model: ogs/PelChem
+    parameters:
+      p_clO2o: 10.0
+      p_clN6r: 1.0
+      p_sN4N3: 0.01
+      p_q10N4N3: 2.367
+      p_qon_nitri: 2.0
+      p_qro: 0.5
+      p_sN3O4n: 0.35
+      p_rPAo: 1.0
+      p_qon_dentri: 1.25
+      p_rOS: 0.05
+      p_sR6N5: 0.1
+      p_q10R6N5: 1.49
+      p_sR8N5: 0.1
+      p_q10R8N5: 1.49
+      p_bX1c: 0.167
+      p_bX2c: 0.167
+      p_bX3c: 0.045686407182592516
+      p_IX1: 60.0
+      p_IX2: 60.0
+      p_IX3: 50.0
+      p_rX3c: 29e-6
+      p_q10X: 2.95
+      p_Esource: 5
+      p_use_benthic: 0
+      p_TauC: 1.0
+      p_TauN: 0.5
+      p_TauP: 1.0
+      p_Amm_rem: 0.2
+    initialization:
+    coupling:
+      N1p: N1/p
+      N3n: N3/n
+      N4n: N4/n
+      O2o: O2/o
+      O3h: O3h/h
+      O3c: O3/c
+      O4n: O4/n
+      N6r: N6/r
+      N5s: N5/s
+      X1c: X1/c
+      X2c: X2/c
+      X3c: X3/c
+      R3c: R3/c
+      R6s: R6/s
+      R6c: R6/c
+      R6n: R6/n
+      R6p: R6/p
+      R8s: R8/s
+      R8c: R8/c
+      R8n: R8/n
+      R8p: R8/p
+      PAR_tot: lightspectral/PAR_tot
+      isBen: Benthic_layer/isBen
+  O5:
+    long_name: calcite
+    model: ogs/CalciteDissolution
+    parameters:
+      p_kdca: 10.9
+      p_nomega: 1.0
+      p_wsinkPIC: 30
+      c0: 1.0e-05
+    initialization:
+      c: 1.0
+    coupling:
+      OCalc: O3/OCalc
+      O3c: O3/c
+      O3h: O3h/h
+  Phyto_c:
+    long_name: total
+    model: weighted_sum
+    parameters:
+      n: 4
+    coupling:
+      term1: P1_c
+      term2: P2_c
+      term3: P3_c
+      term4: P4_c
+  Phyto_Chl:
+    long_name: total
+    model: weighted_sum
+    parameters:
+      n: 4
+    coupling:
+      term1: P1_Chl
+      term2: P2_Chl
+      term3: P3_Chl
+      term4: P4_Chl

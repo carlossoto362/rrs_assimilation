@@ -1,0 +1,17 @@
+#! /bin/bash
+
+#SBATCH --job-name=chla_assimilation
+#SBATCH --nodes=5
+#SBATCH --ntasks-per-node=34
+#SBATCH --time=3:30:00
+#SBATCH --account=OGS23_PRACE_IT
+#SBATCH --partition=g100_usr_prod
+
+
+date
+
+mpirun \
+      -n 1 python3 run.py : \
+      -n $1 eat-gotm --separate_restart_file --separate_gotm_yaml
+
+date
