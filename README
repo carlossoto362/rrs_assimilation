@@ -2,16 +2,70 @@
 contact: carlos.soto362@gmail.com
 ####################################
 
-
+####################################
 ####################################
 Description:
 ####################################
+####################################
+
+Files requiered to reproduce the remote sensing reflectance (RRS) assimilation experiments as a function of constant inflation, as well as with an online
+noise estimation method, for both, an indirect assimilation as well as a direct one.
+The configuration files and forcings were download from zenodo: https://doi.org/10.5281/zenodo.10067424, A GOTM-FABM-BFM setup to run 1D simulations
+at the Boussole site used in Álvarez et al. (2023): Chromophoric dissolved organic matter dynamics revealed through the optimization of a
+spectrally and vertically resolved model in the NW Mediterranean Sea.
+Since the experiments were performed in a cluster, due to limiting space, we are sharing the results of only the variables used for comparizon
+with in-situ observations. 
+
+The remote sensing reflectance assimilation experiments are done using the Ensemble and Assimilation Tool (EAT, https://doi.org/10.5194/gmd-17-5619-2024),
+a python3 tool which uses the Parallel Data Assimilation Framework (PDAF, https://pdaf.awi.de/trac/wiki), a Fortran based softward environment to perform
+data assimilation. EAT works by runing an ensemble of the physico-biogeochemical model in parallel, everytime there is an observation available, stops the
+simulation, performs an analysis step, and then continues the simulation.
+
+The interaction between the biogeochemical model, in our case the Biogeochemical Flux Model (BFM) and the physical component, with the General Ocean
+Turbulence Model (GOTM), is handled by the Framework for Aquatic Biogeochemical Models (FABM). In addition, Alvarez, et al 2023, included the bio-optical
+component to the model, making possible the direct assimilation of rrs.
+
 
 ####################################
 ####################################
-Description of folders
+Requirements
 ####################################
 ####################################
+	-EAT: The EAT tool can be installed with anaconda (see https://github.com/BoldingBruggeman/eat/wiki/, last visit August 7, 2026).
+	It installs GOTM and FABM with their default configurations.
+	It can also be download from github in https://github.com/BoldingBruggeman/eat or from zenodo, DOI: 10.5281/zenodo.10306435.
+
+	-BFM: In addition to the EAT tool, FABM and GOTM, it will be necesary to install the BFM model configure to work with FABM, the original
+	version is available in github (https://github.com/inogs/bfmforfabm.git, last visit August 7, 2026) or zenodo (10.5281/zenodo.10067423).
+	We included the version of the BFM for fabm that we used for the assimilation, where we included the variables NAP and CDOM as part of the
+	outputs of the model (./bfmforfabm).
+
+	-Both BFM and EAT are fortran based, so it is needed a fortran compiler, while eat also uses python version >= 3.8. To install EAT with the
+	anaconda method, it is needed to have installed Anaconda or Miniconda, and to have mpi4py installed for the parallel computations.
+
+	-The experiments were originally performed in a cluster with Slurm workload manager, but it is not necesary to run the comands, except those
+	in files starting with job...
+
+####################################
+####################################
+Installing the necesary software to reproduce the results
+####################################
+####################################
+	-Installing EAT with BFM for FABM with conda:
+		    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -reference:
 	The FABM tool couples the model that handles the physical forsings, in my case GOTM, and the one that handles the biogeochemistry, for me BFM.
