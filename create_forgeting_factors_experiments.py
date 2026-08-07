@@ -3,6 +3,70 @@ import sys
 import numpy as np
 import argparse
 
+from pathlib import Path
+from ruamel.yaml import YAML
+
+
+def _replace_file_paths(obj, forcing_dir):
+    """Recursively replace every 'file' entry with forcing_dir/<filename>."""
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            if key == "file" and isinstance(value, str):
+                filename = Path(value).name
+                obj[key] = str(forcing_dir / filename)
+            else:
+                _replace_file_paths(value, forcing_dir)
+
+    elif isinstance(obj, list):
+        for item in obj:
+            _replace_file_paths(item, forcing_dir)
+
+
+def prepare_gotm_yamls(home_path, assimilation_path, n_user):
+    """
+    Copy gotm_0001.yaml ... gotm_<n_user>.yaml from
+
+        <home_path>/gotms/
+
+    to
+
+        <assimilation_path>/
+
+    replacing every 'file' entry with
+
+        <home_path>/forcing/<original_filename>.
+    """
+
+    yaml=YAML()
+    yaml.preserve_quotes = True
+    yaml.default_flow_style = False
+
+    home_path = Path(home_path).expanduser().resolve()
+    assimilation_path = Path(assimilation_path).expanduser().resolve()
+
+    gotm_dir = home_path / "gotms"
+    forcing_dir = home_path / "forcing"
+
+    assimilation_path.mkdir(parents=True, exist_ok=True)
+
+    for i in range(1, n_user + 1):
+        yaml_file = gotm_dir / f"gotm_{i:04d}.yaml"
+
+        if not yaml_file.exists():
+            raise FileNotFoundError(f"Missing file: {yaml_file}")
+
+        with yaml_file.open("r") as f:
+            data = yaml.load(f)
+
+        _replace_file_paths(data, forcing_dir)
+
+        output_file = assimilation_path / yaml_file.name
+
+        with output_file.open("w") as f:
+            yaml.dump(
+                data,
+                f )
+
 def writing_run(home_path,diagnostics_in_state=['total_chlorophyll'],obs_paths=['chla_inverted.txt'],forget=0.95,observations_z=[-26],exp_obs=True,no_log=True):
     
     diag_state_str = "['"
@@ -69,8 +133,9 @@ def creating_work_space(home_path,da_path,diagnostics_in_state,obs_paths,observa
     if not os.path.exists(path_ + '/bcs'):
         os.system('cp -r reference/bcs ' + path_ + '/')
     if not os.path.exists(path_ + '/gotm_0001.yaml'):
-        for i in range(1,num_ensembles+1):
-            os.system('cp gotms/gotm_{:04d}.yaml '.format(i) + path_ + '/')
+        prepare_gotm_yamls(home_path,path_,num_ensembles)
+        #for i in range(1,num_ensembles+1):
+        #    os.system('cp gotms/gotm_{:04d}.yaml '.format(i) + path_ + '/')
     if not os.path.exists(path_ + '/fabm_0001.yaml'):
         for i in range(1,num_ensembles+1):
             os.system('cp fabms/fabm_{:04d}.yaml '.format(i) + path_ + '/')
@@ -80,7 +145,7 @@ def creating_work_space(home_path,da_path,diagnostics_in_state,obs_paths,observa
 
     os.system('cp '+path_+'/gotm_0001.yaml '+path_+'/gotm.yaml')
     os.system('cp '+path_+'/fabm_0001.yaml '+path_+'/fabm.yaml')
-    os.system('cp '+path_+'/restart_0001.nc'+path_+'restart.nc')
+    os.system('cp '+path_+'/restart_0001.nc '+path_+'restart.nc')
 
 def creating_all_work_spaces(home_path,da_path_,N_):
     

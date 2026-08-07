@@ -31,6 +31,7 @@ component to the model, making possible the direct assimilation of rrs.
 Requirements
 ####################################
 ####################################
+	-CMAKE > 3.5
 	-EAT: The EAT tool can be installed with anaconda (see https://github.com/BoldingBruggeman/eat/wiki/, last visit August 7, 2026).
 	It installs GOTM and FABM with their default configurations.
 	It can also be download from github in https://github.com/BoldingBruggeman/eat or from zenodo, DOI: 10.5281/zenodo.10306435.
@@ -51,17 +52,51 @@ Requirements
 Installing the necesary software to reproduce the results
 ####################################
 ####################################
-	-Installing EAT with BFM for FABM with conda:
-		    
+
+	To reproduce the results is enough to install EAT, the BFM for fabm, and the OASIM model for fabm, next i add the command lines to do so
+	with github:
+	
+	-Downloading fabm-spectral, model of the incomming irradiance, branch split. 
+	
+		$git clone --recursive https://github.com/pmlmodelling/fabm-spectral.git ./extern/spectral
+		$cd extern/spectral
+		$git checkout split
+		$cd ../../
+		     
+	-Downloading bfm for fabm, branch neccton
+	
+		$git clone --recursive https://github.com/inogs/bfmforfabm.git ./extern/ogs
+		$cd extern/ogs
+		$git checkout neccton
+		$cd ../../
+
+        -Modify the light_spectral_OASIM.F90 file for the one we used (includes the definitions for NAP and CDOM)
+	        $mv extern/ogs/light_spectral_OASIM.F90 extern/ogs/light_spectral_OASIM.F90_original
+		$cp reference/light_spectral_OASIM.F90 extern/ogs/
+
+	-Downloading EAT, and installing it
+
+		$git clone --recursive https://github.com/BoldingBruggeman/eat.git ./extern/eat
+		$cd extern/eat
+		$conda env create -f environment.yml
+		$conda activate eat
+		$source ./install -DFABM_INSTITUTES="ogs;spectral" -DFABM_OGS_BASE=../ogs -DFABM_SPECTRAL_BASE=../spectral
+
+        -Installing the pyhton3 module ruamel for managing yaml files. 
+
+		$conda install ruamel.yaml
 
 
 
 
 
+	-Creating experiments:
 
+		$python3 create_forgeting_factors_experiments.py -hp <path/to/rrs_assimilation> -dp <path/to/rrs_assimilation> -N <Number_of_ensemble_members>
 
-
-
+	where <path/to/rrs_assimilation> is the path to the folder where u have the folders gotms, fabms, reference, forcing and observations, and 
+	<Number_of_ensemble_members> is the number of ensemble members per experiment, which has to be (number of cores available - 1) if the simulation
+	 of each ensemble member is performe with one core. 
 
 
 

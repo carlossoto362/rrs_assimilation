@@ -14,11 +14,11 @@ grid:
   method: file_sigma
   ddu: 1.0
   ddl: 1.0
-  file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/grid.dat
+  file: ../../forcing/grid.dat
 temperature:
   method: file
   constant_value: 0.0
-  file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/votemper.txt
+  file: ../../forcing/votemper.txt
   column: 1
   two_layer:
     z_s: 0.0
@@ -31,7 +31,7 @@ temperature:
 salinity:
   method: file
   constant_value: 0.0
-  file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/vosaline.txt
+  file: ../../forcing/vosaline.txt
   column: 1
   two_layer:
     z_s: 0.0
@@ -62,41 +62,41 @@ surface:
   u10:
     method: file
     constant_value: 0.0
-    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    file: ../../forcing/meteo.dat
     column: 1
     scale_factor: 0.9925064140889992
   v10:
     method: file
     constant_value: 0.0
-    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    file: ../../forcing/meteo.dat
     column: 2
     scale_factor: 0.9538861532649711
   airp:
     method: file
     constant_value: 0.0
-    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    file: ../../forcing/meteo.dat
     column: 3
     scale_factor: 100.0
   airt:
     method: file
     constant_value: 0.0
-    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    file: ../../forcing/meteo.dat
     column: 4
   hum:
     method: file
     constant_value: 0.0
-    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    file: ../../forcing/meteo.dat
     column: 5
     type: dew_point
   cloud:
     method: file
     constant_value: 0.0
-    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/meteo.dat
+    file: ../../forcing/meteo.dat
     column: 6
   precip:
     method: file
     constant_value: 0.0
-    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/precip.dat
+    file: ../../forcing/precip.dat
     column: 1
     flux_impact: true
   calc_evaporation: true
@@ -162,7 +162,7 @@ mimic_3d:
     dpdx:
       method: file
       constant_value: 0.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/ugos.csv
+      file: ../../forcing/ugos.csv
       column: 2
       tidal:
         amp_1: 0.0
@@ -172,7 +172,7 @@ mimic_3d:
     dpdy:
       method: file
       constant_value: 0.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/vgos.csv
+      file: ../../forcing/vgos.csv
       column: 2
       tidal:
         amp_1: 0.0
@@ -182,7 +182,7 @@ mimic_3d:
     h:
       method: file
       constant_value: 0.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/ext_press.dat
+      file: ../../forcing/ext_press.dat
       column: 1
     period_1: 44714.0
     period_2: 43200.0
@@ -212,7 +212,7 @@ mimic_3d:
   zeta:
     method: constant
     constant_value: 0.0
-    file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/zeta.dat
+    file: ../../forcing/zeta.dat
     column: 1
     tidal:
       period_1: 44714.0
@@ -245,63 +245,63 @@ fabm:
     mole_fraction_of_carbon_dioxide_in_air:
       method: file
       constant_value: 395.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/pco2a.txt
+      file: ../../forcing/pco2a.txt
       column: 1
     N1/p:
       method: file
       constant_value: 0.4
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/N1p.txt
+      file: ../../forcing/N1p.txt
       relax_tau: 31500000.0
       column: 1
     N3/n:
       method: file
       constant_value: 4.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/N3n.txt
+      file: ../../forcing/N3n.txt
       relax_tau: 31500000.0
       column: 1
     N5/s:
       method: file
       constant_value: 4.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/N5s.txt
+      file: ../../forcing/N5s.txt
       relax_tau: 31500000.0
       column: 1
     O2/o:
       method: file
       constant_value: 220.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/O2o.txt
+      file: ../../forcing/O2o.txt
       relax_tau: 31500000.0
       column: 1
     O3h/h:
       method: file
       constant_value: 2500.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/O3h.txt
+      file: ../../forcing/O3h.txt
       relax_tau: 31500000.0
       column: 1
     O3/c:
       method: file
       constant_value: 25000.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/O3c.txt
+      file: ../../forcing/O3c.txt
       relax_tau: 31500000.0
       column: 1
     visibility_in_air:
       method: constant
       constant_value: 25000.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/oasim.txt
+      file: ../../forcing/oasim.txt
       column: 1
     aerosol_air_mass_type:
       method: constant
       constant_value: 10.0
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/oasim.txt
+      file: ../../forcing/oasim.txt
       column: 1
     atmosphere_mass_content_of_cloud_liquid_water:
       method: constant
       constant_value: 0.1
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/tclw.txt
+      file: ../../forcing/tclw.txt
       column: 1
     atmosphere_mass_content_of_water_vapor:
       method: constant
       constant_value: 0.1
-      file: /g100_work/OGS23_PRACE_IT/csoto/eat/tests/experiments/Ensemble_two/forcing/tcwv.txt
+      file: ../../forcing/tcwv.txt
       column: 1
 eq_state:
   method: jackett
