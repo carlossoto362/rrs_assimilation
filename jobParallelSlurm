@@ -1,0 +1,43 @@
+#! /bin/bash
+
+#SBATCH --job-name=assimilation_forgeting_experiments
+#SBATCH --nodes=5
+#SBATCH --ntasks-per-node=34
+#SBATCH --time=24:00:00
+#SBATCH --account=OGS23_PRACE_IT
+#SBATCH --partition=g100_usr_prod
+
+
+date
+echo "conda init"
+conda init
+conda activate eat
+
+if [ -v $1 ]
+then
+    echo "Seting working directory to default: ./da_chla_nap_cdom_assimilation"
+    search_dir=./da_chla_nap_cdom_assimilation
+    ignore="95000"
+else
+    echo "Seting working directory to $1"
+    search_dir=$1
+fi
+
+
+
+for entry in "$search_dir"/*
+do
+
+     if [[ ${entry: -1} != "n" ]] ||
+       then
+	   echo "cd $entry"
+	   cd $entry
+	   echo "starging run of data assimilation at $(date) for $entry, currently in file $(pwd)"
+	   mpirun -n 1 python3 run.py : -n 148 eat-gotm --separate_restart_file --separate_gotm_yaml
+	   cd ../../
+    #   fi
+    fi
+done
+
+
+date

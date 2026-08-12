@@ -90,9 +90,9 @@ Installing the necesary software to reproduce the results
 
 	-Creating experiments:
 
-		$python3 create_forgeting_factors_experiments.py -hp <path/to/rrs_assimilation> -dp <path/to/rrs_assimilation> -N <Number_of_ensemble_members>
+		$python3 create_forgeting_factors_experiments.py -hp <path/to/home> -N <Number_of_ensemble_members>
 
-	where <path/to/rrs_assimilation> is the path to the folder where u have the folders gotms, fabms, reference, forcing and observations, and 
+	where <path/to/home> is the path to the folder where u have the folders gotms, fabms, reference, forcing and observations, and 
 	<Number_of_ensemble_members> is the number of ensemble members per experiment, which has to be (number of cores available - 1) if the simulation
 	 of each ensemble member is performe with one core. 
 
@@ -171,21 +171,91 @@ File description
 				 
 	We also included the plugin used to store the average statistics of an ensemble simulation without data assimilation.
 
--da_chla_assimilation, da_chla_buoy_assimilation, da_cha_nap_cdom_assimilation, da_rrs_assimilation:
+-da_chla_assimilation, da_chla_buoy_assimilation, da_cha_nap_cdom_assimilation, da_rrs_assimilation, da_no_assimilation:
 	Folders where the experiments with constant inflation, and the experiments with online-noise estimation will be stored with the defoult settings by
 	running
 
-	$python3 create_forgeting_factors_experiments.py -hp <path/to/rrs_assimilation> -dp <path/to/rrs_assimilation> -N <Number_of_ensemble_members>
+	$python3 create_forgeting_factors_experiments.py -hp <path/to/home> -N <Number_of_ensemble_members>
 
-	where <path/to/rrs_assimilation> is the path to the folder where u have the folders gotms, fabms, reference, forcing and observations, and 
+	where <path/to/home> is the path to the folder where u have the folders gotms, fabms, reference, forcing and observations, and 
 	<Number_of_ensemble_members> is the number of ensemble members per experiment, which has to be (number of cores available - 1) if the simulation
 	 of each ensemble member is performe with one core.
 
+	 da_no_assimilation has the run.py script to perform an ensemble data simulation without assimilation. 
+
 -extern:
 	Folder where the softward EAT, BFM (ogs) and the OASIM for FABM (Spectral) will be stored if the steps in
-	"Installing the necesary software to reproduce the results" are followed. 
+	"Installing the necesary software to reproduce the results" are followed.
+
+-validation:
+	Contains a copy of the dataset MedBGCins-v1 (zenodo: https://doi.org/10.5281/zenodo.15489967), and a netCDF4 file with the batimetry used to
+	asses when a datapoint was deep water or not. 
+	For space availability, we don't share the outputs of all the experiments.
 
 ####################################
 ####################################
+Reproducing the experiments:
+####################################
+####################################
+
+If EAT has being installed correctly, then by using 148 ensemble members would lead to the same results as our experiments. There is two kind of experiments:
+
+   -Constant inflation experiments:
+   	     We perform a 10 years simulation plus assimilation with the ESTKF from 2001 to 2010 with different inflation values.
+	     Running the script
+
+	     		$python3 create_forgeting_factors_experiments.py -hp <path/to/home> -N <Number_of_ensemble_members>
+
+	     where <path/to/home> is the path to the folder where u have the folders gotms, fabms, reference, forcing and observations, and 
+	     <Number_of_ensemble_members> is the number of ensemble members per experiment, will create the necesary set up to run the experiments.
+
+	     The script will creat the set up for 10 experiments with different inflation values, for each of the following kind of assimilations:
+	     *assimilating chlorophyll data from the BUOSSOLE buoy, experiments stored in ./da_chla_buoy_assimilation/factor_<#>/
+	     *assimilation of remote sensing chlorophyll, experiments stored in ./da_chla_assimilation/factor_<#>/
+	     *assimilation of remote sensing chlorophyll, nap and cdom, experiments stored in ./da_chla_nap_cdom_assimilation/factor_<#>/
+	     *assimilation of remote sensing reflectance, experiments stored in ./da_rrs_assimilation/factor_<#>/
+
+	     where factor_<#> represent a different folder with the corresponding constant inflation factor for the given experiment with constant inflation.
+	     Inside each folder, you would be able to run
+	     $mpirun -n 1 python3 run.py : -n <number_ensemble_members> eat-gotm --separate_restart_file --separate_gotm_yaml
+	     and the ensemble simulation plus assimilation will be performed, with outputs stored in the given folder, in netCDF4 files called
+	     result_<ensemble_member>.nc.
+
+	     Run the ensemble with 148 ensemble members will need sufficient computational power, for which, we used a cluster with sbatch command. If u have access to it, the
+	     script
+	     $sbatch jobParallelSlurm <path_whith_experiments_to_run>
+	     will run the experiments sequencially in <path_whith_experiments_to_run> (example ./da_chla_assimilation) with 148 ensemble members (in which case
+	     u would need to creat the setup for the experiments using 148 ensemble members).
+
+	     NOTE: It is possible to set a different path for the experiments, in case u need to creat them in a different path with more memory space, check
+	     
+	     $python3 create_forgeting_factors_experiments.py -h
+
+	     In that case, <path_whith_experiments_to_run> will need to point to the path selected when creating the experiment setups.
+
+
+   -Online noise estimation experiments:
+
+   	     Since these are less experiments, we already share the folder with the respective run.py script. To run the experiments, it will still be needed to
+	     copy the gotm, fabm and initialization files from the corresponding ./gotms, ./fabms and ./initializations folders, and then go to the corresponding
+	     folder and run the command,
+	     
+	     $mpirun -n 1 python3 run.py : -n <number_ensemble_members> eat-gotm --separate_restart_file --separate_gotm_yaml
+
+	     The run.py files are in da_<kind_assimilation>_assimilation/in_line_inflation/. 
+
+
+
+
+
+
+	     
+
+	     
+	     
+	     
+
+
+
 
 
