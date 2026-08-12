@@ -28,7 +28,7 @@ component to the model, making possible the direct assimilation of rrs.
 
 ####################################
 ####################################
-Requirements
+Requirements for reproducing the results
 ####################################
 ####################################
 	-CMAKE > 3.5
@@ -38,14 +38,14 @@ Requirements
 
 	-BFM: In addition to the EAT tool, FABM and GOTM, it will be necesary to install the BFM model configure to work with FABM, the original
 	version is available in github (https://github.com/inogs/bfmforfabm.git, last visit August 7, 2026) or zenodo (10.5281/zenodo.10067423).
-	We included the version of the BFM for fabm that we used for the assimilation, where we included the variables NAP and CDOM as part of the
-	outputs of the model (./bfmforfabm).
+	We included the version of the OASIM model for fabm that we used for the assimilation, where we included the variables NAP and CDOM as part of the
+	outputs of the model (./reference/light_spectral_OASIM.F90).
 
 	-Both BFM and EAT are fortran based, so it is needed a fortran compiler, while eat also uses python version >= 3.8. To install EAT with the
 	anaconda method, it is needed to have installed Anaconda or Miniconda, and to have mpi4py installed for the parallel computations.
 
 	-The experiments were originally performed in a cluster with Slurm workload manager, but it is not necesary to run the comands, except those
-	in files starting with job...
+	in files called jobParallelSlurm.
 
 ####################################
 ####################################
@@ -88,8 +88,6 @@ Installing the necesary software to reproduce the results
 
 
 
-
-
 	-Creating experiments:
 
 		$python3 create_forgeting_factors_experiments.py -hp <path/to/rrs_assimilation> -dp <path/to/rrs_assimilation> -N <Number_of_ensemble_members>
@@ -99,41 +97,40 @@ Installing the necesary software to reproduce the results
 	 of each ensemble member is performe with one core. 
 
 
-
-
+####################################
+####################################
+File description
+####################################
+####################################
 
 -reference:
-	The FABM tool couples the model that handles the physical forsings, in my case GOTM, and the one that handles the biogeochemistry, for me BFM.
-	 For this end, he starts reading two files gotm.yaml, which specifies which model to use for the physics dinamics, the paths where to find the
-	 forcings, the initial conditions and the parameterizations to use. Then, if specified in the gotm.yaml file, FABM will also read the file
-	 fabm.yaml, which specifies which model to use for the bio-optical model, the biogeochemical model, the path where the forsings are stored,
-	 the initial conditions, parameterizations and the format for the output file.
 
 	The folder reference contain the baseline files needed to simulate the biogeochemistry properties at the Bouée pour l’acquisition d’une Série
 	 Optique à Long terme (BUOSSOLE) site, located in the Ligurian Sea, subbasin of the Western Mediterranean Sea, approximately at the
-	 coordinates 7 degrees 54 minuts E, 43 degrees 22 minuts N. The forcings were download from Alvarez, 2023 (DOI: 10.5281/zenodo.10067424), with
-	 some modifications. The original fabm file from Alvarez is fabm_original.yaml, the one I used was fabm.yaml and gotm.yaml. There is also the
-	 folder "bcs", which contains the Spectral absorption and total scattering coefficients for water, chlorophyll, cdom and particulate organic
-	 carbon needed to run the bio-optical component of the model implemented by Alvarez et al, 2023 (Chromophoric dissolved organic matter dynamics
-	 revealed through the optimization of an optical--biogeochemical model in the northwestern Mediterranean Sea). Runing:
+	 coordinates 7 degrees 54 minuts E, 43 degrees 22 minuts N, setup download from  Alvarez, 2023 (DOI: 10.5281/zenodo.10067424).
+	 The original fabm is called fabm_original.yaml, the one used with some modifications in the parameter values is fabm.yam.
+	 Toguether with the folder ../forcing, runing:
 
 	    $eat-gotm
 
-	inside this folder should work as long as it contains the files fabm.yaml, gotm.yaml, restart.nc, the forlder bcs, and the folder ../forcings.
+	inside this folder should work as long as it contains the files fabm.yaml, gotm.yaml, restart.nc, the forlder bcs and the folder ../forcings,
+	and the installation of EAT, with BFM and the spectral component was correctly performed. 
 
 	The output is a netcdf with all the variables called result.nc, and a file restart.nc, with the value of the state variables at the end of the
 	 simulation.
 
-####################################
-####################################
+	 -bcs
+		 contains the Spectral absorption and total scattering coefficients for water, chlorophyll, cdom and particulate organic carbon needed
+		 to run the bio optical component of the model implemented by  Alvarez et al, 2023 (Chromophoric dissolved organic matter dynamics
+		 revealed through the optimization of an optical--biogeochemical model in the northwestern Mediterranean Sea).
+
 -forcings:
+
 	These folder has the forcings needed to run the BFM coupled with GOTM and the bio-optical components. It has the same forcings as the ones
 	 used by Alvarez, 2023, plus the eastward gradient of preassure (ugos.csv) and the northward gradient of preassure (vgos.csv).
 
-####################################
-####################################
-
 -observations:
+
 	The ensemble and assimilation tool (EAT) runs the model, and simultaniusly check text files with observations. Every time an observation is
 	 encounter, EAT stops the simulation, executes an assimilation step with the new observation changing the state of the system, and initialize
 	 the simulation with the new states. The observations needed for the assimilation are in this folder. 
@@ -142,6 +139,51 @@ Installing the necesary software to reproduce the results
 	   *log transform of the buoy sea surface chlorophyll: chla_std.txt.
 	   *log transform of the remote sensing reflectance: rrs_425.txt, rrs_450.txt, rrs_500.txt, rrs_525.txt, rrs_550.txt.
 	   *log transform of the remote sensing sea surface chlorophyll, nap and cdom: chla_inverted.txt, nap_inverted.txt, cdom_inverted.txt.
+
+-fabms:
+	The goal of the work was to analyse the performance of an ensemble based data assimilation. For this end, we created an ensemble of simulations
+	with different initial conditions and parameterizations. To ensure reproducibility, the parameterizations corresponding
+	to the biogeochemical and bio-optical model used during our work are in the different fabm_#.yaml files. 
+
+-gotms:
+	The goal of the work was to analyse the performance of an ensemble based data assimilation. For this end, we created an ensemble of simulations
+	with different initial conditions and parameterizations. To ensure reproducibility, the parameterizations corresponding
+	to the physical component of the model used during our work are in the different gotm_#.yaml files.
+
+-initializations:
+	The goal of the work was to analyse the performance of an ensemble based data assimilation. For this end, we created an ensemble of simulations
+	with different initial conditions and parameterizations. To ensure reproducibility, the initicializations corresponding
+	to the physical component of the model used during our work are in the different restart_#.yaml files.
+
+-plugins:
+	Two main plugins were used during the assimilation steps, in addition to the main plugins already available in the EAT tool.
+	
+	    *transform_clean.py: Log transform the state variables, and force the output values to be between the ranges:
+	    			     x > max(gamma_min,gamma_)
+				     x < max(gamma_max,gamma+)
+	     			 where gamma_ = 1E-9, gamma+ = 4, and gamma_min and gamma_max are the minimum and maximum value of the variable x during an
+				 assimilation without assimilation. This procedure showed to help to avoid divergences, hopping it didn't has a strong effect
+				 in the final results. We also add noise with zero mean, uniformly distributed between −0.1E−9 and 0.1E−9 to
+				 variables with zero variance.
+
+	    *online_noise.py: 	 This plug in adds noise and every time an observation is available, adjust the amplitude of the noise added
+	    			 according to an online-noise estimation scheem.
+				 
+	We also included the plugin used to store the average statistics of an ensemble simulation without data assimilation.
+
+-da_chla_assimilation, da_chla_buoy_assimilation, da_cha_nap_cdom_assimilation, da_rrs_assimilation:
+	Folders where the experiments with constant inflation, and the experiments with online-noise estimation will be stored with the defoult settings by
+	running
+
+	$python3 create_forgeting_factors_experiments.py -hp <path/to/rrs_assimilation> -dp <path/to/rrs_assimilation> -N <Number_of_ensemble_members>
+
+	where <path/to/rrs_assimilation> is the path to the folder where u have the folders gotms, fabms, reference, forcing and observations, and 
+	<Number_of_ensemble_members> is the number of ensemble members per experiment, which has to be (number of cores available - 1) if the simulation
+	 of each ensemble member is performe with one core.
+
+-extern:
+	Folder where the softward EAT, BFM (ogs) and the OASIM for FABM (Spectral) will be stored if the steps in
+	"Installing the necesary software to reproduce the results" are followed. 
 
 ####################################
 ####################################
