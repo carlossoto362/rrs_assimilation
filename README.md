@@ -1,18 +1,19 @@
 contact: carlos.soto362@gmail.com
+zenodo: https://doi.org/10.5281/zenodo.21982871
+github: https://github.com/carlossoto362/rrs_assimilation
 
 ## Description
 
-Files required to reproduce the remote sensing reflectance
-(RRS) assimilation experiments as a function of constant
-inflation, as well as with an online noise estimation
-method, for both an indirect assimilation and a direct one.
-The configuration files and forcings were downloaded from
-[zenodo](https://doi.org/10.5281/zenodo.10067424)
+Files required to reproduce the results of
+C.E. Soto Lopez, et al. 2026, "Assessing direct
+ and indirect assimilation of remote sensing
+ reflectance in a one dimensional biogeochemical
+ model of the Northwestern Mediterranean Sea".
 
-A GOTM-FABM-BFM setup to run 1D simulations at the
-Boussole site used in [Álvarez et al. (2023)](https://doi.org/10.5194/bg-20-4591-2023). Since the experiments were
-performed on a cluster, we only share the configuration
-files needed to run the experiments.
+Due to space availability, here we only share the
+configuration files. All the instructions to install
+the software need to reproduce the results is in
+the README.md file. 
 
 The remote sensing reflectance assimilation experiments are
 done using the Ensemble and Assimilation Tool [EAT](https://doi.org/10.5194/gmd-17-5619-2024), a Python 3 tool
