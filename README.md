@@ -12,7 +12,7 @@ C.E. Soto Lopez, et al. 2026, "Assessing direct
 
 Due to space availability, here we only share the
 configuration files. All the instructions to install
-the software need to reproduce the results is in
+the software needed to reproduce the results is in
 the README.md file. 
 
 The remote sensing reflectance assimilation experiments are
