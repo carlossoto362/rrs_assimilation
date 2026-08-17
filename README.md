@@ -31,7 +31,7 @@ Models (FABM). In addition, [Álvarez et al. (2023)](https://doi.org/10.5194/bg-
 the bio-optical component in the model, making possible
 the direct assimilation of rrs.
 
-##Requirements for reproducing the results
+## Requirements for reproducing the results
 
 - **CMAKE**
 - **EAT:** The EAT tool can be installed with Anaconda;
@@ -64,13 +64,13 @@ it is not necessary to reproduce the experiments, the files
 called jobParallelSlurm are scripts to schedule the
 experiments on a cluster managed with Slurm.
 
-##Installing the necessary software to reproduce the results
+## Installing the necessary software to reproduce the results
 
 
 To reproduce the results, it is enough to install EAT, the BFM for
 FABM, and the OASIM model for FABM.
 
-###command lines to do so with GitHub, and Anaconda:
+### command lines to do so with GitHub, and Anaconda:
 	
 - Downloading fabm-spectral, model of the incoming irradiance,
 	
@@ -162,9 +162,9 @@ ensemble members per experiment, which has to be (number of
 cores available - 1) if the simulation of ensemble members is
 performed with one core each. 
 
-##File description
+## File description
 
-###reference
+### reference
 
 The folder reference contains the baseline files needed to
 simulate the biogeochemical properties at the Bouée pour
@@ -191,14 +191,14 @@ The output is a netcdf with all the variables called result.nc,
 and a file restart.nc, with the value of the state variables
 at the end of the simulation.
 
-####reference/bcs
+#### reference/bcs
 
 Contains the spectral absorption and total scattering
 coefficients for water, chlorophyll, cdom, and particulate
 organic carbon needed to run the bio-optical component of the
 model implemented by [Álvarez et al. (2023)](https://doi.org/10.5194/bg-20-4591-2023).
 
-###forcings
+### forcings
 
 This folder has the forcings needed to run the BFM coupled
 with GOTM and the bio-optical components. It has the same
@@ -206,7 +206,7 @@ forcings as the ones used by [Álvarez et al. (2023)](https://doi.org/10.5194/bg
 plus the eastward gradient of pressure (ugos.csv) and the
 northward gradient of pressure (vgos.csv).
 
-###observations
+### observations
 
 The ensemble and assimilation tool (EAT) runs the model and
 simultaneously checks text files with observations. Every time
@@ -233,7 +233,7 @@ chlorophyll, nap and cdom:**
   - nap_inverted.txt
   - cdom_inverted.txt
   
-###fabms
+### fabms
 
 The goal of the work was to analyse the performance of an
 ensemble-based data assimilation. For this end, we created an
@@ -243,7 +243,7 @@ parameterizations corresponding to the biogeochemical and
 bio-optical model used during our work are in the different
 [fabm_#.yaml](fabms/fabm_0001.yaml) files. 
 
-###gotms
+### gotms
 
 The goal of the work was to analyse the performance of an
 ensemble-based data assimilation. For this end, we created an
@@ -252,7 +252,7 @@ parameterizations. To ensure reproducibility, the
 parameterizations corresponding to the physical model used
 during our work are in the different [gotm_#.yaml](gotms/fabm_0001.yaml) files. 
 
-###initializations
+### initializations
 
 The goal of the work was to analyse the performance of an
 ensemble-based data assimilation. For this end, we created an
@@ -261,7 +261,7 @@ parameterizations. To ensure reproducibility, the
 initial conditions for the model used during our work are in
 the different [restart_#.nc](initializations/restart_0001.yaml) files. 
 
-###plugins
+### plugins
 
 Two main plugins were used during the assimilation steps, in
 addition to the main plugins already available in the EAT
@@ -291,7 +291,7 @@ We also included the plugin used to store the average
 statistics of an ensemble simulation without data
 assimilation.
 
-###da_chla_assimilation, da_chla_buoy_assimilation, da_cha_nap_cdom_assimilation, da_rrs_assimilation, da_no_assimilation
+### da_chla_assimilation, da_chla_buoy_assimilation, da_cha_nap_cdom_assimilation, da_rrs_assimilation, da_no_assimilation
 
 Folders where the experiments with constant inflation, and the
 experiments with online-noise estimation, will be stored with
@@ -314,25 +314,25 @@ the folder da_no_assimilation/factor_00001 has the
 [run.py](da_no_assimilation/factor_00001/run.py) script to
 perform an ensemble simulation without data assimilation. 
 
-###extern
+### extern
 
 Intended as the folder where the software EAT, BFM (ogs), and
 the OASIM for FABM (Spectral) will be stored if the steps in
 the section [command lines to do so with GitHub, and Anaconda](#command-lines-to-do-so-with-GitHub,-and-Anaconda).
 
-###validation
+### validation
 Contains a copy of the dataset [MedBGCins-v1](https://doi.org/10.5281/zenodo.15489967),
 and a netCDF4 file with the bathymetry used to assess when a
 datapoint was deep water or not. For space availability, we
 don't share the outputs of all the experiments.
 
-##Reproducing the experiments:
+## Reproducing the experiments:
 
 If EAT has been installed correctly, then using 148
 ensemble members would lead to the same results as our
 experiments. There are two kinds of experiments:
 
-###Constant inflation experiments
+### Constant inflation experiments
 
 We perform a 10-year simulation plus assimilation with the
 ESTKF from 2001 to 2010 with different inflation values.
