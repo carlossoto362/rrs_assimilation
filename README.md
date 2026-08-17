@@ -10,7 +10,7 @@ The configuration files and forcings were downloaded from
 [zenodo](https://doi.org/10.5281/zenodo.10067424)
 
 A GOTM-FABM-BFM setup to run 1D simulations at the
-Boussole site used in [Álvarez et al. (2023)](https://doi.org/10.5281/zenodo.10067424). Since the experiments were
+Boussole site used in [Álvarez et al. (2023)](https://doi.org/10.5194/bg-20-4591-2023). Since the experiments were
 performed on a cluster, we only share the configuration
 files needed to run the experiments.
 
@@ -27,7 +27,7 @@ The interaction between the biogeochemical model, in our
 case the Biogeochemical Flux Model (BFM), and the physical
 component, the General Ocean Turbulence Model (GOTM),
 is handled by the Framework for Aquatic Biogeochemical
-Models (FABM). In addition, [Álvarez et al. (2023)](https://doi.org/10.5281/zenodo.10067424) included
+Models (FABM). In addition, [Álvarez et al. (2023)](https://doi.org/10.5194/bg-20-4591-2023) included
 the bio-optical component in the model, making possible
 the direct assimilation of rrs.
 
@@ -196,13 +196,13 @@ at the end of the simulation.
 Contains the spectral absorption and total scattering
 coefficients for water, chlorophyll, cdom, and particulate
 organic carbon needed to run the bio-optical component of the
-model implemented by [Álvarez et al. (2023)](https://doi.org/10.5281/zenodo.10067424).
+model implemented by [Álvarez et al. (2023)](https://doi.org/10.5194/bg-20-4591-2023).
 
 ###forcings
 
 This folder has the forcings needed to run the BFM coupled
 with GOTM and the bio-optical components. It has the same
-forcings as the ones used by [Álvarez et al. (2023)](https://doi.org/10.5281/zenodo.10067424),
+forcings as the ones used by [Álvarez et al. (2023)](https://doi.org/10.5194/bg-20-4591-2023),
 plus the eastward gradient of pressure (ugos.csv) and the
 northward gradient of pressure (vgos.csv).
 
